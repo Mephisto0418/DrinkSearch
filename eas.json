@@ -1,0 +1,38 @@
+{
+  "cli": {
+    "version": ">= 5.9.0"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "env": {
+        "GOOGLE_MAPS_API_KEY": "輸入你的Google Maps API密鑰"
+      },
+      "android": {
+        "gradleCommand": ":app:assembleDebug",
+        "buildType": "apk"
+      },
+      "ios": {
+        "buildConfiguration": "Debug"
+      }
+    },
+    "preview": {
+      "distribution": "internal",
+      "env": {
+        "GOOGLE_MAPS_API_KEY": "輸入你的Google Maps API密鑰"
+      },
+      "android": {
+        "buildType": "apk"
+      }
+    },
+    "production": {
+      "env": {
+        "GOOGLE_MAPS_API_KEY": "輸入你的Google Maps API密鑰"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}
