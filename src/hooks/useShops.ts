@@ -65,13 +65,24 @@ export default function useShops(location: Location | null) {
     }
   }, []);
 
+  // 當位置變化時，執行搜尋
+  useEffect(() => {
+    if (location) {
+      searchShops({ radius: 10, showFavoritesOnly: false }); // 預設搜尋參數
+    }
+  }, [location, searchShops]);
+
   // 當位置或偏好變化時重新獲取數據
   useEffect(() => {
-    if (location && shops.length > 0) {
-      // 過濾已存在的商店，移除黑名單中的店家
-      const filteredShops = shops.filter(shop => !isBlacklisted(shop.id));
-      setShops(filteredShops);
-    }
+    try {
+      if (location && shops.length > 0) {
+        // 過濾已存在的商店，移除黑名單中的店家
+        const filteredShops = shops.filter(shop => !isBlacklisted(shop.id));
+        setShops(filteredShops);
+      }
+    } catch (error) {
+      console.error("Error filtering shops:", error);
+    }  
   }, [location, preferences.blacklist, isBlacklisted]);
 
   return {

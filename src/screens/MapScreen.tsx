@@ -50,7 +50,7 @@ const MapScreen: React.FC = () => {
   
   // 當位置變化時，更新地圖區域
   useEffect(() => {
-    if (location) {
+    if (location && location.latitude && location.longitude) {
       const region: Region = {
         latitude: location.latitude,
         longitude: location.longitude,
@@ -132,7 +132,8 @@ const MapScreen: React.FC = () => {
           } : undefined
         }
       >
-        {shops.map(shop => (
+        {shops && shops.length > 0 ? (
+          shops.map(shop => (
           <Marker
             key={shop.id}
             coordinate={{
